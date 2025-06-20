@@ -1,5 +1,9 @@
-![openAPI](https://img.shields.io/badge/docs-openapi-blue)
-![MIT](https://img.shields.io/badge/license-MIT-green)
+
+[![openAPI](https://img.shields.io/badge/docs-openapi-blue)](https://github.com/qingfenglailai/dropshipchinapro-fulfillment/blob/main/openapi.yaml)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/qingfenglailai/dropshipchinapro-fulfillment/blob/main/LICENSE)
+
+## OpenAPI spec
+[OpenAPI Specification](https://github.com/qingfenglailai/dropshipchinapro-fulfillment/docs)
 
 # Dropship China Pro Fulfillment Services
 
@@ -67,4 +71,7 @@ China-Cost · us-speed → 2-Day dual-coast
 ## Cost Calculator Example  
 ## SLA& support  
 
-[OpenAPI spec](./openapi.yaml)
+⭐ Star to keep us building!
+
+<!--keywords:LA warehouse,N] warehouse, 2-day fulfillment, Shopify app, low-cost shipping,custom packaging-->
+
