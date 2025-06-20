@@ -1,3 +1,6 @@
+![openAPI](https://img.shields.io/badge/docs-openapi-blue)
+![MIT](https://img.shields.io/badge/license-MIT-green)
+
 # Dropship China Pro Fulfillment Services
 
 Welcome to the official repository of **Dropship China Pro (DSCP)** – a leading 3PL provider offering **US warehouse fulfillment**, **custom packaging**, and **2‑day shipping** solutions for global eCommerce brands and dropshipping businesses.
@@ -56,5 +59,12 @@ This repository is used to document our fulfillment services, updates, and best 
 
 \> [Dropship China Pro](https://dropshipchinapro.com/) – Helping eCommerce brands scale smarter, not harder.
 
+# DSCP Fulfillment API  
+China-Cost · us-speed → 2-Day dual-coast  
 
+## Endpoints(OpenAPI link)  
+## Quick start(shopify App + API token)  
+## Cost Calculator Example  
+## SLA& support  
 
+[OpenAPI spec](./openapi.yaml)
