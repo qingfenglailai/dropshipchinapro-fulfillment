@@ -1,5 +1,5 @@
 
-[![openAPI](https://img.shields.io/badge/docs-openapi-blue)](https://github.com/qingfenglailai/dropshipchinapro-fulfillment/blob/main/openapi.yaml)
+[![openAPI](https://img.shields.io/badge/docs-openapi-blue)](./openapi.yaml)
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/qingfenglailai/dropshipchinapro-fulfillment/blob/main/LICENSE)
 
 ## OpenAPI spec
