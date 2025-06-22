@@ -1,48 +1,60 @@
 {
-  "apiVersion": "1.0",
-  "title": "示例 API 文档",
-  "description": "这是一个小型的示例 API 文档，用于展示如何使用 JSON 格式描述 API。",
-  "basePath": "/api",
-  "host": "dropshipchinapro.com",
-  "schemes": [
-    "https"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "用户信息管理API",
+    "description": "这是一个简单的用户信息管理API，提供用户创建、获取、更新和删除的功能。",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://dropshipchinapro.com/v1",
+      "description": "生产环境"
+    }
   ],
   "paths": {
     "/users": {
       "get": {
-        "summary": "获取用户列表",
+        "summary": "获取所有用户",
         "description": "返回所有用户的列表",
         "responses": {
           "200": {
             "description": "成功",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
               }
             }
           }
         }
       },
       "post": {
-        "summary": "创建新用户",
-        "description": "创建一个新用户",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "user",
-            "description": "用户信息",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
+        "summary": "创建用户",
+        "description": "创建一个新的用户",
+        "requestBody": {
+          "description": "用户信息",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
           "201": {
             "description": "创建成功",
-            "schema": {
-              "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
             }
           }
         }
@@ -50,106 +62,118 @@
     },
     "/users/{id}": {
       "get": {
-        "summary": "获取用户详情",
-        "description": "根据用户 ID 获取用户详情",
+        "summary": "获取用户信息",
+        "description": "根据用户ID获取用户信息",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
-            "description": "用户 ID",
+            "in": "path",
+            "description": "用户ID",
             "required": true,
-            "type": "integer"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "成功",
-            "schema": {
-              "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
             }
           },
           "404": {
-            "description": "用户不存在"
+            "description": "用户未找到"
           }
         }
       },
       "put": {
         "summary": "更新用户信息",
-        "description": "根据用户 ID 更新用户信息",
+        "description": "根据用户ID更新用户信息",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
-            "description": "用户 ID",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "body",
-            "name": "user",
-            "description": "用户信息",
+            "in": "path",
+            "description": "用户ID",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "description": "用户信息",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "更新成功",
-            "schema": {
-              "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
             }
-          },
-          "404": {
-            "description": "用户不存在"
           }
         }
       },
       "delete": {
         "summary": "删除用户",
-        "description": "根据用户 ID 删除用户",
+        "description": "根据用户ID删除用户",
         "parameters": [
           {
-            "in": "path",
             "name": "id",
-            "description": "用户 ID",
+            "in": "path",
+            "description": "用户ID",
             "required": true,
-            "type": "integer"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "204": {
             "description": "删除成功"
-          },
-          "404": {
-            "description": "用户不存在"
           }
         }
       }
     }
   },
-  "definitions": {
-    "User": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "用户 ID"
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "用户ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "用户名"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "用户邮箱"
+          }
         },
-        "name": {
-          "type": "string",
-          "description": "用户姓名"
-        },
-        "email": {
-          "type": "string",
-          "description": "用户邮箱"
-        },
-        "created_at": {
-          "type": "string",
-          "format": "date-time",
-          "description": "用户创建时间"
-        }
+        "required": [
+          "name",
+          "email"
+        ]
       }
     }
   }
