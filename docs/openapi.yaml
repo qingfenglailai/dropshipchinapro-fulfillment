@@ -6,6 +6,8 @@ info:
 servers:
   - url: https://dropshipchinapro.com/v1
     description: 生产环境
+security:
+  - bearerAuth: []
 paths:
   /users:
     get:
@@ -20,6 +22,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     post:
       summary: 创建用户
       description: 创建一个新的用户
@@ -37,6 +45,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /users/{id}:
     get:
       summary: 获取用户信息
@@ -55,8 +69,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
         '404':
-          description: 用户未找到
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     put:
       summary: 更新用户信息
       description: 根据用户ID更新用户信息
@@ -81,6 +101,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       summary: 删除用户
       description: 根据用户ID删除用户
@@ -94,6 +122,14 @@ paths:
       responses:
         '204':
           description: 删除成功
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     User:
@@ -112,3 +148,69 @@ components:
       required:
         - name
         - email
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 错误代码
+        message:
+          type: string
+          description: 错误消息
+      required:
+        - code
+        - message
+  responses:
+    NotFoundError:
+      description: 未找到
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            userNotFound:
+              summary: 用户未找到
+              value:
+                code: 404
+                message: "用户未找到。"
+    UnauthorizedError:
+      description: 未授权
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            unauthorized:
+              summary: 未授权示例
+              value:
+                code: 401
+                message: "未授权，请提供有效的认证信息。"
+    RateLimitError:
+      description: 请求过于频繁
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            rateLimitExceeded:
+              summary: 请求频繁示例
+              value:
+                code: 429
+                message: "请求过于频繁，请稍后再试。"
+    InternalServerError:
+      description: 服务器内部错误
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            internalError:
+              summary: 服务器错误示例
+              value:
+                code: 500
+                message: "服务器内部错误，请联系管理员。"
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
