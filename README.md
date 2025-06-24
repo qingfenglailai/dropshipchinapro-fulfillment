@@ -3,7 +3,7 @@
 [![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/qingfenglailai/dropshipchinapro-fulfillment/blob/main/LICENSE)
 
 ## OpenAPI spec
-[OpenAPI Specification](https://github.com/qingfenglailai/dropshipchinapro-fulfillment/docs)
+[OpenAPI Specification](https://qingfenglailai.github.io/dropshipchinapro-fulfillment)
 
 # Dropship China Pro Fulfillment Services
 
